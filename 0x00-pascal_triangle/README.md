@@ -1,13 +1,11 @@
 0x00. Pascal's Triangle
 =======================
 
-Algorithm
-
-Python
+Algorithm, Python
 
 By: Alexa Orrico, Software Engineer at Holberton School
 
-### Concepts\
+### Concepts
 *For this project, we expect you to look at this concept:*
 -  [Technical interview](https://intranet.alxswe.com/concepts/100005)
 

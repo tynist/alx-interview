@@ -24,7 +24,7 @@ def pascal_triangle(n):
             element = pa_triangle[row_num-1][i-1] + pa_triangle[row_num-1][i]
             row.append(element)
 
-        # Add the last element to the row and append the row to the triangle list
+        # Add the last element to d row and append d row to the triangle list
         row.append(1)
         pa_triangle.append(row)
 

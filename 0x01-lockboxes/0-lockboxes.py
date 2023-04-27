@@ -1,7 +1,8 @@
 #!/usr/bin/python3
 """
 You have n number of locked boxes in front of you.
-Each box is numbered sequentially from 0 to n - 1 and each box may contain keys to the other boxes
+Each box is numbered sequentially from 0 to n - 1
+and each box may contain keys to the other boxes
 """
 
 
@@ -22,7 +23,8 @@ def canUnlockAll(box):
     # Loop through each unlocked box and its keys
     for current_box in unlocked_boxes:
         for key in box[current_box]:
-            # Check if key has not been used to unlock a box yet and is a valid box index
+            # Check if key has not been used to unlock a box yet
+            # and is a valid box index
             if key not in unlocked_boxes and key < len(box):
                 # Add key to the list of unlocked boxes
                 unlocked_boxes.append(key)

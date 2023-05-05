@@ -1,5 +1,6 @@
 #!/usr/bin/python3
-"""Minimum operations"""
+""" Minimum operations """
+
 
 def minOperations(n):
     """
@@ -16,7 +17,7 @@ def minOperations(n):
 
     # Iterate over possible operations from 2 to n
     for poss_operations in range(2, n+1):
-        # If n is divisible by the operation, 
+        # If n is divisible by the operation,
         # recursively calculate the minimum number of operations needed
         if n % poss_operations == 0:
             return minOperations(int(n/poss_operations)) + poss_operations

@@ -11,15 +11,16 @@ def minOperations(n):
     - n: an integer representing the desired number of H characters in the file
 
     Returns:
-    - an integer representing the minimum number of operations needed to achieve
-    n H characters, or 0 if it is impossible to achieve n H characters
-
+    - int: The fewest number of operations needed to achieve the desired
+    number of H characters.
+    If the desired number of H characters is impossible to achieve,
+    returns 0
     """
 
-    # If n is less than 1, it is impossible to achieve n H characters, so return 0
+    # If n is less than 1, it is impossible to achieve n H characters
     if n < 1:
         return 0
-    
+
     # Initialize variables
     current = 1
     clipboard = 0
@@ -27,13 +28,13 @@ def minOperations(n):
 
     # Loop while current is less than n
     while current < n:
-        
-        # If n is divisible by current, copy all characters to the clipboard and
-        # paste them until current equals n
+
+        # If n is divisible by current, copy all characters to the
+        # clipboard and paste them until current equals n
         if n % current == 0:
             clipboard = current
             count += 2
-        
+
         # If n is not divisible by current, paste the clipboard and
         # add the number of characters in the clipboard to current
         else:
@@ -42,4 +43,3 @@ def minOperations(n):
 
     # Return the minimum number of operations needed
     return count
-

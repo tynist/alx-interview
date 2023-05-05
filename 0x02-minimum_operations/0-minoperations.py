@@ -1,45 +1,25 @@
 #!/usr/bin/python3
-"""Minimum Operations"""
-
+"""Minimum operations"""
 
 def minOperations(n):
     """
-    Calculates the fewest number of operations needed to result
-    in exactly n H characters in the file.
+    Calculate the fewest number of operations needed to result in
+    exactly n H characters in a file.
 
-    Args:
-    - n: an integer representing the desired number of H characters in the file
-
-    Returns:
-    - int: The fewest number of operations needed to achieve the desired
-    number of H characters.
-    If the desired number of H characters is impossible to achieve,
-    returns 0
+    :param n: The number of H characters to achieve
+    :return: The fewest number of operations needed to achieve
+    n H characters, or 0 if n is impossible to achieve
     """
-
-    # If n is less than 1, it is impossible to achieve n H characters
-    if n < 1:
+    # If n is less than or equal to 1, no operations are needed
+    if n <= 1:
         return 0
 
-    # Initialize variables
-    current = 1
-    clipboard = 0
-    count = 0
+    # Iterate over possible operations from 2 to n
+    for poss_operations in range(2, n+1):
+        # If n is divisible by the operation, 
+        # recursively calculate the minimum number of operations needed
+        if n % poss_operations == 0:
+            return minOperations(int(n/poss_operations)) + poss_operations
 
-    # Loop while current is less than n
-    while current < n:
-
-        # If n is divisible by current, copy all characters to the
-        # clipboard and paste them until current equals n
-        if n % current == 0:
-            clipboard = current
-            count += 2
-
-        # If n is not divisible by current, paste the clipboard and
-        # add the number of characters in the clipboard to current
-        else:
-            current += clipboard
-            count += 1
-
-    # Return the minimum number of operations needed
-    return count
+    # If there is no possible operation to achieve n, return 0
+    return 0

@@ -20,22 +20,23 @@ def print_status(status_count_dict, file_size):
         if dict[key] != 0:
             print("{}: {}".format(key, dict[key]))
 
+
 status_count_dict = {'200': 0, '301': 0, '400': 0, '401': 0, '403': 0,
                '404': 0, '405': 0, '500': 0}
 
 file_size = 0
-fil_count = 0
+count = 0
 
 try:
     for line in sys.stdin:
-        if fil_count != 0 and fil_count % 10 == 0:
+        if count != 0 and count % 10 == 0:
             print_status(status_count_dict, file_size)
 
         el = line.split(" ")
-        fil_count += 1
+        count += 1
 
         try:
-            fil_size += int(el[-1])
+            file_size += int(el[-1])
         except:
             pass
 
@@ -45,6 +46,7 @@ try:
         except:
             pass
     print_status(status_count_dict, file_size)
+
 
 except KeyboardInterrupt:
     print_status(status_count_dict, file_size)

@@ -6,13 +6,13 @@ import sys
 
 
 def print_status(status_counts, total_fil_size):
-    "““
+    """
     Args:
-        status_counts (dict): A dictionary containing the status codes
+        status_counts (dict): A dictionary containing the status codes.
         and their respective counts.
-        total_fil_size (int): The total file size.
+       total_fil_size (int): The total file size.
 
-    Prints:
+Prints:
         The file size and the number of lines for each status code.
     """
     print("Total file size:", total_fil_size)

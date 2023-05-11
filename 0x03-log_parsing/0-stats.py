@@ -6,7 +6,7 @@ import sys
 
 
 def print_status(dict, size):
-      """
+    """
     Args:
         status_count_dict (dict): dictionary contains the status codes and
         their respective counts.
@@ -24,11 +24,11 @@ status_count_dict = {'200': 0, '301': 0, '400': 0, '401': 0, '403': 0,
                '404': 0, '405': 0, '500': 0}
 
 file_size = 0
-fil_count = 0
+count = 0
 
 try:
     for line in sys.stdin:
-        if fil_count != 0 and fil_count % 10 == 0:
+        if count != 0 and count % 10 == 0:
             print_status(status_count_dict, file_size)
 
         el = line.split(" ")

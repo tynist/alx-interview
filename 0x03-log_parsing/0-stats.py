@@ -3,24 +3,10 @@
 Script that reads stdin line by line and computes metrics
 """
 import sys
+import sys
 
 
-<<<<<<< HEAD
-def print_status(dict, size):
-    """
-=======
-def print_status(status_count_dict, file_size):
-      """
->>>>>>> f02c953884966db772a1a007a70fc0c7fdd1f43c
-    Args:
-        status_count_dict (dict): dictionary contains the status codes and
-        their respective counts.
-        file_size (int): The total file size.7
-
-    Prints:
-        The file size and the number of lines for each status code
-    """
-    print("File size: {}".format(size))
+print("File size: {}".format(size))
     for key in sorted(dict.keys()):
         if dict[key] != 0:
             print("{}: {}".format(key, dict[key]))

@@ -5,7 +5,7 @@ Script that reads stdin line by line and computes metrics
 import sys
 
 
-def print_status(dict, size):
+def print_status(status_count_dict, file_size):
       """
     Args:
         status_count_dict (dict): dictionary contains the status codes and

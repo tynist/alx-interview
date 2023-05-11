@@ -6,8 +6,7 @@ import sys
 
 
 def print_status(status_counts, total_fil_size):
-    "““Prints the statistics in the specified format. 
-
+    "““
     Args:
         status_counts (dict): A dictionary containing the status codes
         and their respective counts.

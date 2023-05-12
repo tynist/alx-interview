@@ -6,7 +6,15 @@ import sys
 
 
 def print_status(dict, size):
-    """Print the format"""
+    """
+    Args:
+        status_dict (dict): Dictionary contains the status codes and
+        their respective counts.
+        file_size (int): The total file size.
+
+    Prints:
+        The file size and the number of lines for each status code
+    """
     print("File size: {}".format(size))
     for key in sorted(dict.keys()):
         if dict[key] != 0:
@@ -16,31 +24,32 @@ def print_status(dict, size):
 status_dict = {'200': 0, '301': 0, '400': 0, '401': 0, '403': 0,
                '404': 0, '405': 0, '500': 0}
 
-file_size = 0
-count = 0
+file_size = 0  # Total file size counter
+line_count = 0  # Number of lines read from input
 
 try:
     for line in sys.stdin:
-        if count != 0 and count % 10 == 0:
+        if line_count != 0 and line_count % 10 == 0:
+            # Print metrics every 10 lines
             print_status(status_dict, file_size)
 
-        el = line.split(" ")
-        count += 1
+        elem = line.split(" ")  # Split the line by space
+        line_count += 1
 
         try:
-            file_size += int(el[-1])
+            # Get file size from the last element
+            file_size += int(elem[-1])
         except:
             pass
 
         try:
-            if el[-2] in status_dict.keys():
-                status_dict[el[-2]] += 1
+            # Get HTTP status code from the second-to-last element
+            if elem[-2] in status_dict.keys():
+                status_dict[elem[-2]] += 1
         except:
             pass
-    print_status(status_dict, file_size)
+    print_status(status_dict, file_size)  # print final metrics
 
-
-except KeyboardInterrupt:
+except KeyboardInterrupt:   # Handle KeyboardInterrupt exception
     print_status(status_dict, file_size)
-    raise
     raise

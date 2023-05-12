@@ -1,18 +1,15 @@
-
-
-Curriculum
-Short Specializations
-Average: 127.35%
 0x03. Log Parsing
-Algorithm
-Python
- By: Alexa Orrico, Software Engineer at Holberton School
- Weight: 1
- Project will start May 8, 2023 6:00 AM, must end by May 12, 2023 6:00 AM
- Checker was released at May 9, 2023 6:00 AM
- An auto review will be launched at the deadline
+=================
+
+Algorithm, Python
+
+By: Alexa Orrico, Software Engineer at Holberton School
+
+
 Requirements
-General
+—-----------
+
+### General
 Allowed editors: vi, vim, emacs
 All your files will be interpreted/compiled on Ubuntu 14.04 LTS using python3 (version 3.4.3)
 All your files should end with a new line
@@ -21,11 +18,14 @@ A README.md file, at the root of the folder of the project, is mandatory
 Your code should use the PEP 8 style (version 1.7.x)
 All your files must be executable
 The length of your files will be tested using wc
-Tasks
-0. Log parsing
-mandatory
-Write a script that reads stdin line by line and computes metrics:
 
+
+
+Tasks
+### 0\. Log parsing
+
+Write a script that reads stdin line by line and computes metrics:
+7
 Input format: <IP Address> - [<date>] "GET /projects/260 HTTP/1.1" <status code> <file size> (if the format is not this one, the line must be skipped)
 After every 10 lines and/or a keyboard interruption (CTRL + C), print these statistics from the beginning:
 Total file size: File size: <total size>
@@ -37,6 +37,7 @@ format: <status code>: <number>
 status codes should be printed in ascending order
 Warning: In this sample, you will have random value - it’s normal to not have the same output as this one.
 
+```
 alexa@ubuntu:~/0x03-log_parsing$ cat 0-generator.py
 #!/usr/bin/python3
 import random
@@ -98,7 +99,7 @@ KeyboardInterrupt
     sleep(random.random())
 KeyboardInterrupt
 alexa@ubuntu:~/0x03-log_parsing$ 
-
+```
 
 **Repo:**
 

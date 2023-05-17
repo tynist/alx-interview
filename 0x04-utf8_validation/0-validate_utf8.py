@@ -5,35 +5,35 @@ UTF-8 Validation
 
 
 def validUTF8(data):
-    number_of_bytes = 0  # number of bytes in the current UTF-8 char
-    # goes into the numbers of the given set
-    for numbers in data:
-        # prints the 8least sig bits
-        number_of_bin = format(numbers, '#010b')[-8:]
-        if number_of_bytes == 0:  # start processing a new UTF-8 char
+    """
+    Checks if a list of integers represents a valid UTF-8 encoding
 
-            # Get the number of 1s in the beginning of the string.
-            for bit in number_of_bin:
-                if bit == '0':
+    Args:
+        data (list): List of integers representing the bytes of the data set.
+
+    Returns:
+        bool: True if data is a valid UTF-8 encoding, False otherwise.
+    """
+    nbrs_of_bytez = 0  # Number of bytes in the current UTF-8 character
+
+    for nbr in data:
+        binary_rep = format(nbr, '#010b')[-8:]  # Convert the number to its binary representation
+
+        if nbrs_of_bytez == 0:  # Start processing a new UTF-8 character
+            for i in binary_rep:
+                if i == '0':
                     break
-                number_of_bytes += 1
+                nbrs_of_bytez += 1
 
-            if number_of_bytes == 0:  # 1 byte characters
+            if nbrs_of_bytez == 0:  # Invalid start of a character
                 continue
 
-            # A character in UTF-8 can be 1 to 4 bytes long
-            if number_of_bytes == 1 or number_of_bytes > 4:
+            if nbrs_of_bytez == 1 or nbrs_of_bytez > 4:  # Invalid number of bytes for a character
                 return False
         else:
-
-            # Bytes which are a part of
-            # a UTF-8 character must adhere
-            # to the pattern `10xxxxxx`.
-            if not number_of_bin.startswith('10'):
+            if not binary_rep.startswith('10'):  # Check if the byte is a continuation byte
                 return False
 
-        # We reduce the number of bytes
-        # to process by 1 after each integer.
-        number_of_bytes -= 1
+        nbrs_of_bytez -= 1
 
-    return number_of_bytes == 0
+    return nbrs_of_bytez == 0  # Check if all characters have been completed

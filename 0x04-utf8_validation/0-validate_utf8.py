@@ -19,19 +19,19 @@ def validUTF8(data):
     nbr_of_bytez = 0
 
     for nbrs in data:
-        # Check if the most significant bit is set (indicating the start of a new character)
+        # Check if d most significant bit is set (start of a new character)
         if nbr_of_bytez == 0:
             # Check if the nbrs is a single-nbrs character
             if nbrs >> 7 == 0b0:
                 # Valid single-nbrs character
                 continue
-            # Check if the nbrs is a two-nbrs character
+            # Check if the nbrs is a two-number character
             elif nbrs >> 5 == 0b110:
                 nbr_of_bytez = 1
-            # Check if the nbrs is a three-nbrs character
+            # Check if the nbrs is a three-number character
             elif nbrs >> 4 == 0b1110:
                 nbr_of_bytez = 2
-            # Check if the nbrs is a four-nbrs character
+            # Check if the nbrs is a four-number character
             elif nbrs >> 3 == 0b11110:
                 nbr_of_bytez = 3
             else:

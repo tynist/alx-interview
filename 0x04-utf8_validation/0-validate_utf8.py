@@ -5,46 +5,35 @@ UTF-8 Validation
 
 
 def validUTF8(data):
-    """
-    Checks if a given data set represents a valid UTF-8 encoding.
+    number_of_bytes = 0  # number of bytes in the current UTF-8 char
+    # goes into the numbers of the given set
+    for numbers in data:
+        # prints the 8least sig bits
+        number_of_bin = format(numbers, '#010b')[-8:]
+        if number_of_bytes == 0:  # start processing a new UTF-8 char
 
-    Args:
-        data (list): List of integers representing the bytes of the data set.
+            # Get the number of 1s in the beginning of the string.
+            for bit in number_of_bin:
+                if bit == '0':
+                    break
+                number_of_bytes += 1
 
-    Returns:
-        bool: True if data is a valid UTF-8 encoding, False otherwise.
-    """
-
-    # Number of bytes remaining to complete the current UTF-8 character
-    nbr_of_bytez = 0
-
-    for nbrs in data:
-        # Check if d most significant bit is set (start of a new character)
-        if nbr_of_bytez == 0:
-            # Check if the nbrs is a single-nbrs character
-            if nbrs >> 7 == 0b0:
-                # Valid single-nbrs character
+            if number_of_bytes == 0:  # 1 byte characters
                 continue
-            # Check if the nbrs is a two-number character
-            elif nbrs >> 5 == 0b110:
-                nbr_of_bytez = 1
-            # Check if the nbrs is a three-number character
-            elif nbrs >> 4 == 0b1110:
-                nbr_of_bytez = 2
-            # Check if the nbrs is a four-number character
-            elif nbrs >> 3 == 0b11110:
-                nbr_of_bytez = 3
-            else:
-                # Invalid start of a character
+
+            # A character in UTF-8 can be 1 to 4 bytes long
+            if number_of_bytes == 1 or number_of_bytes > 4:
                 return False
         else:
-            # Check if the nbrs is a continuation nbrs
-            if nbrs >> 6 != 0b10:
-                # Invalid continuation nbrs
+
+            # Bytes which are a part of
+            # a UTF-8 character must adhere
+            # to the pattern `10xxxxxx`.
+            if not number_of_bin.startswith('10'):
                 return False
 
-        # Decrement the number of remaining bytes
-        nbr_of_bytez -= 1
+        # We reduce the number of bytes
+        # to process by 1 after each integer.
+        number_of_bytes -= 1
 
-    # Check if there are any incomplete characters
-    return nbr_of_bytez == 0
+    return number_of_bytes == 0

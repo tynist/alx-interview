@@ -6,28 +6,45 @@ UTF-8 Validation
 
 def validUTF8(data):
     """
-    Determines if a given data set represents a valid UTF-8 encoding.
+    Checks if a given data set represents a valid UTF-8 encoding.
 
     Args:
-        data: A list of integers representing the data set.
+        data (list): List of integers representing the bytes of the data set.
 
     Returns:
-        True if data is a valid UTF-8 encoding, else return False.
+        bool: True if data is a valid UTF-8 encoding, False otherwise.
     """
 
-    # Check if each byte in the data set is in the range 0x00 to 0xFF.
-    for byte in data:
-        if byte < 0x00 or byte > 0xFF:
-            return False
+    # Number of bytes remaining to complete the current UTF-8 character
+    nbr_of_bytez = 0
 
-    # Checks if first byte of each character is in range 0xC2 to 0xF7
-    for i in range(0, len(data), 2):
-        if data[i] not in range(0xC2, 0xF8):
-            return False
+    for nbrs in data:
+        # Check if the most significant bit is set (indicating the start of a new character)
+        if nbr_of_bytez == 0:
+            # Check if the nbrs is a single-nbrs character
+            if nbrs >> 7 == 0b0:
+                # Valid single-nbrs character
+                continue
+            # Check if the nbrs is a two-nbrs character
+            elif nbrs >> 5 == 0b110:
+                nbr_of_bytez = 1
+            # Check if the nbrs is a three-nbrs character
+            elif nbrs >> 4 == 0b1110:
+                nbr_of_bytez = 2
+            # Check if the nbrs is a four-nbrs character
+            elif nbrs >> 3 == 0b11110:
+                nbr_of_bytez = 3
+            else:
+                # Invalid start of a character
+                return False
+        else:
+            # Check if the nbrs is a continuation nbrs
+            if nbrs >> 6 != 0b10:
+                # Invalid continuation nbrs
+                return False
 
-    # Checks if continuation bytes of each xter are in range 0x80 - 0xBF
-    for i in range(1, len(data), 2):
-        if data[i] not in range(0x80, 0xBF):
-            return False
+        # Decrement the number of remaining bytes
+        nbr_of_bytez -= 1
 
-    return True
+    # Check if there are any incomplete characters
+    return nbr_of_bytez == 0

@@ -11,6 +11,8 @@ def safe_positn(board, row, col):
     Check if it's safe to place a queen at the given
     position (row, col) on the chessboard.
     """
+    board_size = len(board)
+    
     # Check row on the left side
     for c in range(col):
         if board[row][c] == 1:
@@ -26,7 +28,7 @@ def safe_positn(board, row, col):
 
     # Check lower diagonal on the left side
     r, c = row, col
-    while r < len(board) and c >= 0:
+    while r < board_size and c >= 0:
         if board[r][c] == 1:
             return False
         r += 1
@@ -47,27 +49,29 @@ def SolveNqueens(board, col, solutns):
     Returns:
         bool: True if a solution is found, otherwise False.
     """
-    if col == len(board):
+    board_size = len(board)
+    
+    if col == board_size:
         # Found a solutn, convert board state to coordinates & add to solutns
         solutn = []
-        for r in range(len(board)):
-            for c in range(len(board)):
+        for r in range(board_size):
+            for c in range(board_size):
                 if board[r][c] == 1:
                     solutn.append([r, c])
         solutns.append(solutn)
         return True
 
-    res = False
-    for r in range(len(board)):
+    found = False
+    for r in range(board_size):
         if safe_positn(board, r, col):
             # Place a queen at the current position
             board[r][col] = 1
             # Recur for the next column
-            res = SolveNqueens(board, col + 1, solutns) or res
+            found = SolveNqueens(board, col + 1, solutns) or found
             # Backtrack and remove the queen from the current position
             board[r][col] = 0
 
-    return res
+    return found
 
 
 def NQueens(n):

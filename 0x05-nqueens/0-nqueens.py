@@ -38,7 +38,7 @@ def solve_nqueens_util(board, col, solutions):
     A recursive utility function to solve the N Queens problem.
     """
     if col == len(board):
-        # Found a solution, convert board state to coordinates and add to solutions
+        # Found a solutn, convert board state to coordinates & add to solutns
         solution = []
         for i in range(len(board)):
             for j in range(len(board)):
@@ -83,6 +83,7 @@ def solve_nqueens(n):
 
     for solution in solutions:
         print(solution)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

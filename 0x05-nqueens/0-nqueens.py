@@ -12,7 +12,7 @@ def safe_positn(board, row, col):
     position (row, col) on the chessboard.
     """
     # Check row on the left side
-    for i in range(col):
+    for c in range(col):
         if board[row][c] == 1:
             return False
 

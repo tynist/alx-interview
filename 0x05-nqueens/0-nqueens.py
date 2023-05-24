@@ -1,5 +1,9 @@
 #!/usr/bin/python3
+"""
+N queens
+"""
 import sys
+
 
 def solve_nqueens(n):
     """
@@ -51,7 +55,7 @@ def solve_nqueens(n):
         """
 
         if row == n:
-            # All queens are placed, add the current board configuration to solutions
+            # All queens are placed, add the current board config to solutions
             solutions.append([(i, board[i]) for i in range(n)])
             return
 
@@ -66,6 +70,7 @@ def solve_nqueens(n):
     board = [-1] * n
     place_queens(board, 0)
     return solutions
+
 
 if __name__ == '__main__':
     # Check if the correct number of arguments is provided

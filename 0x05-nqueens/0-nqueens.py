@@ -12,7 +12,7 @@ def safe_positn(board, row, col):
     position (row, col) on the chessboard.
     """
     board_size = len(board)
-    
+
     # Check row on the left side
     for c in range(col):
         if board[row][c] == 1:
@@ -50,7 +50,7 @@ def SolveNqueens(board, col, solutns):
         bool: True if a solution is found, otherwise False.
     """
     board_size = len(board)
-    
+
     if col == board_size:
         # Found a solutn, convert board state to coordinates & add to solutns
         solutn = []

@@ -8,7 +8,7 @@ import sys
 
 def safe_positn(board, row, col):
     """
-    Check if it's safe to place a queen at the given 
+    Check if it's safe to place a queen at the given
     position (row, col) on the chessboard.
     """
     # Check row on the left side
@@ -69,6 +69,7 @@ def SolveNqueens(board, col, solutns):
 
     return res
 
+
 def NQueens(n):
     """
     Solve the N Queens problem and print all solutns.
@@ -91,6 +92,7 @@ def NQueens(n):
 
     for solutn in solutns:
         print(solutn)
+
 
 if __name__ == "__main__":
     if len(sys.argv) != 2:

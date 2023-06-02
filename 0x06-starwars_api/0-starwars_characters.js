@@ -1,43 +1,32 @@
 #!/usr/bin/node
+// script that prints all characters of a Star Wars movie:
 const request = require('request');
+const filmID = process.argv[2]; // Movie ID passed as a command line argument
+const apiUrl = `https://swapi-api.alx-tools.com/api/films/${filmID}`; // API URL for the movie
 
-const movieId = process.argv[2];
-
-if (!movieId) {
-  console.error('Movie ID is required as an argument.');
-  process.exit(1);
-}
-
-const apiUrl = `https://swapi-api.alx-tools.com/api/films/${movieId}/`;
-
+// Make a GET request to retrieve the movie data
 request(apiUrl, function (error, response, body) {
-  if (error) {
-    console.error('Error:', error);
-    process.exit(1);
+  if (!error) {
+    const filmData = JSON.parse(body); // Parse the movie data from the response
+    const characterUrls = filmData.characters; // Array of character URLs from the movie data
+    printCharacterNames(characterUrls, 0); // Start printing character names recursively
   }
-  
-  if (response.statusCode !== 200) {
-    console.error('Failed to retrieve movie data:', response.statusCode);
-    process.exit(1);
-  }
-
-  const filmData = JSON.parse(body);
-  const characters = filmData.characters;
-
-  characters.forEach(function (characterUrl) {
-    request(characterUrl, function (error, response, body) {
-      if (error) {
-        console.error('Error:', error);
-        return;
-      }
-
-      if (response.statusCode !== 200) {
-        console.error('Failed to retrieve character data:', response.statusCode);
-        return;
-      }
-
-      const characterData = JSON.parse(body);
-      console.log(characterData.name);
-    });
-  });
 });
+
+// Recursive function to print the characters' names
+function printCharacterNames(characterUrls, index) {
+  if (index >= characterUrls.length) {
+    return; // Base case: all characters have been printed
+  }
+
+  const characterUrl = characterUrls[index]; // URL of the current character
+  // Make a GET request for each character URL
+  request(characterUrl, function (error, response, body) {
+    if (!error) {
+      const character = JSON.parse(body); // Parse the character data from the response
+      console.log(character.name); // Print the character name
+      // Call the printCharacterNames function recursively with the next character index
+      printCharacterNames(characterUrls, index + 1);
+    }
+  });
+}

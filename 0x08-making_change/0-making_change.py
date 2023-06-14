@@ -19,19 +19,20 @@ def makeChange(coins, total):
     if total <= 0:
         return 0
 
-    # Initialize the list to store the minimum coin count
-    min_coin = [float('inf')] * (total + 1)
-    min_coin[0] = 0
+    # Sort coins in descending order for the greedy algorithm
+    coins.sort(reverse=True)
 
-    # Iterate over each coin value
-    for coin_value in coins:
-        # Iterate from the coin value to the target total
-        for i in range(coin_value, total + 1):
-            # Update mini_coin[i]
-            min_coin[i] = min(min_coin[i], min_coin[i - coin_value] + 1)
+    count = 0  # Number of coins used so far
+    for coin in coins:
+        if coin <= total:
+            # Add the maximum number of coins possible for the current denomination
+            count += total // coin
+            # Update the total by taking the remainder after using the coins
+            total %= coin
+        if total == 0:
+            break
 
-    # Check if the total cannot be met by any combination of coins
-    if min_coin[total] == float('inf'):
-        return -1
+    if total == 0:
+        return count  # Successfully made change for the given amount
     else:
-        return min_coin[total]
+        return -1  # Unable to make change for the given amount

@@ -14,7 +14,6 @@ def makeChange(coins, total):
     Returns:
         int: Fewest number of coins needed to meet the total.
              -1 - If total cannot be met by any combination of coins you have.
-
     """
     if total <= 0:
         return 0
@@ -24,7 +23,7 @@ def makeChange(coins, total):
     mini_coin[0] = 0
 
     # Iterate over each coin value
-    for coin_value in coin_values:
+    for coin_value in coins:
         # Iterate from the coin value to the target total
         for i in range(coin_value, total + 1):
             # Update mini_coin[i]

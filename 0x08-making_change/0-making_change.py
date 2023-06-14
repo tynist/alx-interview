@@ -22,17 +22,17 @@ def makeChange(coins, total):
     # Sort coins in descending order for the greedy algorithm
     coins.sort(reverse=True)
 
-    count = 0  # Number of coins used so far
-    for coin in coins:
-        if coin <= total:
+    coin_count = 0  # Number of coins used so far
+    for coin_value in coins:
+        if coin_value <= total:
             # Add the max possible coins for the current denomination
-            count += total // coin
+            coin_count += total // coin_value
             # Update the total by taking the remainder after using the coins
-            total %= coin
+            total %= coin_value
         if total == 0:
             break
 
     if total == 0:
-        return count  # Successfully made change for the given amount
+        return coin_count  # Successfully made change for the given amount
     else:
         return -1  # Unable to make change for the given amount

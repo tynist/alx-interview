@@ -25,7 +25,7 @@ def makeChange(coins, total):
     count = 0  # Number of coins used so far
     for coin in coins:
         if coin <= total:
-            # Add the maximum number of coins possible for the current denomination
+            # Add the max possible coins for the current denomination
             count += total // coin
             # Update the total by taking the remainder after using the coins
             total %= coin

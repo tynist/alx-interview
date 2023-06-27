@@ -6,7 +6,7 @@ Prime Game
 
 def isWinner(x, nums):
     """
-    Determine the winner of each game given the number of rounds and the list of numbers.
+    Find the winner of the prime game given the rounds and nums.
     Args:
         x (int): Number of rounds to play.
         nums (list of int): A list of the numbers rolled in each round.
@@ -42,7 +42,7 @@ def isWinner(x, nums):
         """
         # Create an empty list to store the prime numbers.
         primes = []
-        
+
         # Iterate over the numbers from 2 to n.
         for number in range(2, n + 1):
             if is_prime_number(number):  # Check if the number is prime.
@@ -79,10 +79,10 @@ def isWinner(x, nums):
         round_num = nums[i]
         round_primes = get_prime_numbers(round_num)
         if can_player_win(round_primes, round_num):
-            # If Maria can win for the current round, increment Maria's win count
+            # If Maria can win, increment Maria's win count
             maria_wins_count += 1
         else:
-            # If Ben can win for the current round, increment Ben's win count
+            # If Ben can win, increment Ben's win count
             ben_wins_count += 1
 
     # Return the name of the player with the most wins.

@@ -4,72 +4,75 @@ Prime Game
 """
 
 
+def findMultiples(num, targets):
+    """
+    Finds multiples of a given number within a list
+    """
+    for i in targets:
+        if i % num == 0:
+            targets.remove(i)
+    return targets
+
+
+def isPrime(i):
+    """
+    Check if a number is prime.
+    """
+    if i == 1:
+        return False
+    for j in range(2, i):
+        if i % j == 0:
+            return False
+    return True
+
+
+def findPrimes(n):
+    """
+    Dispatch a given set into prime numbers and non-prime numbers.
+    """
+    counter = 0
+    target = list(n)
+    for i in range(1, len(target) + 1):
+        if isPrime(i):
+            counter += 1
+            target.remove(i)
+            target = findMultiples(i, target)
+        else:
+            pass
+    return counter
+
+
 def isWinner(x, nums):
     """
-    Find the winner of the prime game given the rounds and nums.
-    Args:
-        x (int): Number of rounds to play.
-        nums (list of int): A list of the numbers rolled in each round.
-    Returns:
-        str: Name of player that won most rounds.
-        None: If no winner.
+    Maria and Ben are playing a game.Given a set of consecutive integers
+    starting from 1 up to and including n, they take turns choosing a
+    prime number from the set and removing that number and its
+    multiples from the set.
+    The player that cannot make a move loses the game.
+
+    They play x rounds of the game, where n may be different for each round.
+    Assuming Maria always goes first and both players play optimally,
+    determine who the winner of each game is.
     """
-    if not nums or x < 1:
-        return None
+    players = {'Maria': 0, 'Ben': 0}
+    cluster = set()
+    for elem in range(x):
+        nums.sort()
+        num = nums[elem]
+        for i in range(1, num + 1):
+            cluster.add(i)
+            if i == num + 1:
+                break
+        temp = findPrimes(cluster)
 
-    def is_prime_number(number):
-        """
-        Determines if a number is prime.
-        Args:
-            number (int): The number to check.
-        Returns:
-            bool: True if the number is prime, False otherwise.
-        """
-        if number < 2:  # Numbers less than 2 are not prime
-            return False
-        for i in range(2, int(number ** 0.5) + 1):
-            # Check divisibility of the number from 2 to its square root
-            if number % i == 0:
-                # Not prime if divisible by any value
-                return False
-        return True  # Number is prime if no divisor is found
+        if temp % 2 == 0:
+            players['Ben'] += 1
+        elif temp % 2 != 0:
+            players['Maria'] += 1
 
-    def count_primes_up_to(n):
-        """
-        Count the number of prime numbers up to a given number.
-        Args:
-            n (int): The upper limit for counting prime numbers.
-        Returns:
-            int: The count of prime numbers up to n.
-        """
-        # Create an empty list to store the prime numbers.
-        primes = []
-
-        # Iterate over the numbers from 2 to n.
-        for number in range(2, n + 1):
-            if is_prime_number(number):  # Check if the number is prime.
-                primes.append(number)  # add to the list if number is prime
-        return len(primes)
-
-    # Number of rounds Maria & Ben has won.
-    maria_wins_count = 0
-    ben_wins_count = 0
-
-    # Iterate over the list of numbers
-    for n in nums:
-        # Count the number of primes up to n.
-        prime_count = count_primes_up_to(n)
-        # If the number of primes is odd, Maria wins the round.
-        if prime_count % 2 == 1:
-            maria_wins_count += 1
-        else:
-            # Otherwise, Ben wins the round.
-            ben_wins_count += 1
-
-    # Return the name of the player with the most wins.
-    if maria_wins_count > ben_wins_count:
-        return "Maria"
-    elif ben_wins_count > maria_wins_count:
-        return "Ben"
+    if players['Maria'] > players['Ben']:
+        return 'Maria'
+    elif players['Maria'] < players['Ben']:
+        return 'Ben'
     else:
         return None

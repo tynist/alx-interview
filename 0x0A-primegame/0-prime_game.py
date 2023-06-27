@@ -36,6 +36,11 @@ def isWinner(x, nums):
 
     def count_primes_up_to(n):
         """
+        Count the number of prime numbers up to a given number.
+        Args:
+            n (int): The upper limit for counting prime numbers.
+        Returns:
+            int: The count of prime numbers up to n.
         """
         # Create an empty list to store the prime numbers.
         primes = []

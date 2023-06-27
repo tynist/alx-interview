@@ -64,9 +64,9 @@ def isWinner(x, nums):
         if n in primes:
             return True
         # Otherwise, check if n is divisible by any of the prime numbers.
-        for prime in primes:
-            if n % prime == 0:
-                return True
+        # for prime in primes:
+        #     if n % prime == 0:
+        #         return True
         # If none of the above conditions are met, the player cannot win
         return False
 
@@ -86,9 +86,9 @@ def isWinner(x, nums):
             ben_wins_count += 1
 
     # Return the name of the player with the most wins.
-    if maria_wins_count > ben_wins_count:
-        return "Maria"
-    elif ben_wins_count > maria_wins_count:
+    if ben_wins_count > maria_wins_count:
         return "Ben"
+    elif maria_wins_count > ben_wins_count:
+        return "Maria"
     else:
         return None

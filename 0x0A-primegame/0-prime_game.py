@@ -15,7 +15,7 @@ def is_prime_numbers(n):
     prime_numbs = []  # List to store the prime numbers
     # Boolean list to mark all numbers as prime (Sieve of Eratosthenes)
     sieve = [True] * (n + 1)
-    
+
     # Iterate over the numbers from 2 to n
     for num in range(2, n + 1):
         if sieve[num]:  # If number is marked as prime, adds to the list

@@ -43,18 +43,22 @@ def isWinner(x, nums):
         # Iterate over the numbers from 2 to n.
         for number in range(2, n + 1):
             if is_prime_number(number):  # Check if the number is prime.
-                primes.append(number)  # add to the list If the number is prime
+                primes.append(number)  # add to the list if number is prime
         return len(primes)
 
+    # Number of rounds Maria & Ben has won.
     maria_wins_count = 0
     ben_wins_count = 0
 
     # Iterate over the list of numbers
     for n in nums:
+        # Count the number of primes up to n.
         prime_count = count_primes_up_to(n)
+        # If the number of primes is odd, Maria wins the round.
         if prime_count % 2 == 1:
             maria_wins_count += 1
         else:
+            # Otherwise, Ben wins the round.
             ben_wins_count += 1
 
     # Return the name of the player with the most wins.

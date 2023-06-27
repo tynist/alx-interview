@@ -14,6 +14,8 @@ def isWinner(x, nums):
         str: Name of player that won most rounds.
         None: If no winner.
     """
+    if not nums or x < 1:
+        return None
 
     def is_prime_number(number):
         """
@@ -32,13 +34,8 @@ def isWinner(x, nums):
                 return False
         return True  # Number is prime if no divisor is found
 
-    def get_prime_numbers(n):
+    def count_primes_up_to(n):
         """
-        Get a list of prime numbers up to n.
-        Args:
-            n (int): The upper limit for generating prime numbers.
-        Returns:
-            list: List of prime numbers up to n.
         """
         # Create an empty list to store the prime numbers.
         primes = []
@@ -47,48 +44,23 @@ def isWinner(x, nums):
         for number in range(2, n + 1):
             if is_prime_number(number):  # Check if the number is prime.
                 primes.append(number)  # add to the list If the number is prime
-        return primes
+        return len(primes)
 
-    def can_player_win(primes, n):
-        """
-        Check if a player can win for a given n.
-
-        Args:
-            primes (list): List of prime numbers.
-            n (int): The number to check.
-
-        Returns:
-            bool: True if the player can win, False otherwise.
-        """
-        # If n is a prime number, the player can win
-        if n in primes:
-            return True
-        # Otherwise, check if n is divisible by any of the prime numbers.
-        # for prime in primes:
-        #     if n % prime == 0:
-        #         return True
-        # If none of the above conditions are met, the player cannot win
-        return False
-
-    # Initialize the count of Maria's & Ben's wins to 0
     maria_wins_count = 0
     ben_wins_count = 0
 
     # Iterate over the list of numbers
-    for i in range(x):
-        round_num = nums[i]
-        round_primes = get_prime_numbers(round_num)
-        if can_player_win(round_primes, round_num):
-            # If Maria can win, increment Maria's win count
+    for n in nums:
+        prime_count = count_primes_up_to(n)
+        if prime_count % 2 == 1:
             maria_wins_count += 1
         else:
-            # If Ben can win, increment Ben's win count
             ben_wins_count += 1
 
     # Return the name of the player with the most wins.
-    if ben_wins_count > maria_wins_count:
-        return "Ben"
-    elif maria_wins_count > ben_wins_count:
+    if maria_wins_count > ben_wins_count:
         return "Maria"
+    elif ben_wins_count > maria_wins_count:
+        return "Ben"
     else:
         return None
